@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000;
+            color: rgb(231, 222, 222);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin: 20px 0 10px;
+            animation: neonGlow 2s infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            from {
+                text-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff4d4d, 0 0 30px #ff4d4d;
+                opacity: 1;
+            }
+            to {
+                text-shadow: 0 0 2px #ff4d4d, 0 0 5px #ff4d4d, 0 0 10px #ff4d4d;
+                opacity: 0.6;
+            }
+        }
+
+        p {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+
+        #buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #yesBtn {
+            background-color: #ff4d4d;
+            color: rgb(218, 216, 212);
+        }
+
+        #noBtn {
+            background-color: #cccccc;
+            color: black;
+            position: absolute;
+        }
+
+        #message {
+            display: none;
+            margin-top: 50px;
+            font-size: 3rem;
+            color: #ff4d4d;
+            text-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff4d4d;
+        }
+    </style>
+</head>
+<body>
+    <h1>TE AMO DEMASIADO MI CONEJITA</h1>
+    <p>Mi hermosa conejita bebé, ¿aceptarías ser mi San Valentín? 🐰💐</p>
+    <div id="buttons">
+        <button class="btn" id="yesBtn">Sí (ño hay más opciones muejeje)</button>
+    </div>
+    <div id="message">¡Te amo mucho! Gracias por aceptar ❤️</div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+
+        yesBtn.addEventListener('click', () => {
+    document.body.innerHTML = `
+        <h1>Te amo tantisimo mi niña :(((</h1>
+        <p>Sos lo mejor que me pudo haber pasado mi hermosa niña:(<br>
+        Tu sonrisa ilumina mis días y tus abrazos me dan vida.<br>
+        Siempre estaré acá para vos, mi adorable bebé, en las buenas y en las malas.<br>
+        Sos la niña más pero más hermosa que existe en toda la tierra, en serio que no te das una idea de los bella que sos mi amor.<br>
+        Cada sonrisa, cada risa, cada vez que veo tus bellos ojos, cada vez que escucho tu voz, dios, quedo tan enamorado mi amor.<br>
+        Esto solamente es un poco de todo lo que te daré, mi hermosa niña :3<br>
+        Gracias en serio por aceptar ser mi novia:(</p>
+    `;
+});
+
+
+
+        document.addEventListener('mousemove', (e) => {
+            const rect = noBtn.getBoundingClientRect();
+            const distanceX = Math.abs(e.clientX - rect.left - rect.width / 2);
+            const distanceY = Math.abs(e.clientY - rect.top - rect.height / 2);
+
+            if (distanceX < 150 && distanceY < 75) {  // Ampliar el rango para mayor sensibilidad
+                const moveX = (Math.random() - 0.5) * 400;  // Mayor desplazamiento
+                const moveY = (Math.random() - 0.5) * 400;
+
+                let newX = rect.left + moveX;
+                let newY = rect.top + moveY;
+
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+
+                if (newX < 0) newX = 0;
+                if (newX + rect.width > windowWidth) newX = windowWidth - rect.width;
+                if (newY < 0) newY = 0;
+                if (newY + rect.height > windowHeight) newY = windowHeight - rect.height;
+
+                noBtn.style.left = `${newX}px`;
+                noBtn.style.top = `${newY}px`;
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            const rect = noBtn.getBoundingClientRect();
+
+            if (rect.right > windowWidth) {
+                noBtn.style.left = `${windowWidth - rect.width}px`;
+            }
+
+            if (rect.bottom > windowHeight) {
+                noBtn.style.top = `${windowHeight - rect.height}px`;
+            }
+        });
+    </script>
+</body>
+</html>
